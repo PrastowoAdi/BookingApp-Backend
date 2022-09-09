@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 import hotelRoute from "./routes/hotels.js";
+import authRoute from "./routes/auth.js";
 
 const app = express();
 dotenv.config();
@@ -21,9 +23,11 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middleware
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/hotels", hotelRoute);
+app.use("/api/auth", authRoute);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
