@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import hotelRoute from "./routes/hotels.js";
 import authRoute from "./routes/auth.js";
+import userRoute from "./routes/users.js";
 
 const app = express();
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(express.json());
 
 app.use("/api/hotels", hotelRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
